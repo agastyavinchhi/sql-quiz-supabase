@@ -101,5 +101,4 @@ On Streamlit Cloud, the same keys are entered under **App settings → Secrets**
 | `ci_check.py` | Database check run by GitHub Actions |
 | `.github/workflows/db-check.yml` | GitHub Actions workflow (uses GitHub Secrets) |
 | `Chinook_PostgreSql.sql` | Schema + data for the Chinook database |
-| `query.py` | In-class lab script (Python ↔ Postgres CRUD demo) |
 | `requirements.txt` | Python dependencies |
