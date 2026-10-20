@@ -54,10 +54,16 @@ Repository secrets used (Settings → Secrets and variables → Actions):
 ## Extra credit
 - **Parameterized queries:** the app's own writes use `%s` placeholders (`log_action` in `app.py`; `ci_check.py`), with no f-string SQL.
 - **Audit log:** every **Run** and **Save** by a signed-in user is recorded in the `audit_log` table (`user_email`, `action` = run/save, `question_id`, `sql_text`, `created_at`).
+
+  ![audit_log rows](audit_log.png)
 - **Integrity check:** `audit_log` is append-only.
   - `quiz_reader` has only `INSERT` (no `SELECT`/`UPDATE`/`DELETE`/`TRUNCATE`), so takers cannot change or read the log.
   - A trigger (`block_audit_changes`) rejects every `UPDATE`, `DELETE`, and `TRUNCATE`, even from the admin.
+
+    ![DELETE blocked: audit_log is append-only](append_only.png)
   - CI verifies this on every push.
+
+    ![GitHub Actions: quiz_reader cannot UPDATE audit_log](github_actions.png)
 
 ## Database setup (run in the Supabase SQL Editor)
 1. Run `Chinook_PostgreSql.sql` to create and load the Chinook tables.
